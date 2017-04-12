@@ -91,6 +91,9 @@
         <meta-data
             android:name="android.max_aspect"
             android:value="3.0" />
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="029f7174d6a8b1565036966ca71105a8"/>
 
         <activity
             android:name=".MainActivity"
@@ -335,8 +338,37 @@
         </activity>
         <activity
             android:name=".maps.mapsforge.MapsforgeMapActivity"
+            android:theme="@style/cgeo_with_actionbar"
             android:label="@string/map_map" >
         </activity>
+
+        <!--android:theme="@style/cgeo_material"-->
+        <activity
+            android:name=".maps.mapsforge.MapsforgeAppCompatMapActivity"
+
+            android:label="@string/map_map" >
+
+
+        </activity>
+
+
+        <!--new main activity, all map fragments in one drawer activity-->
+        <activity
+            android:name=".maps.Appcompat.MainActivity"
+            android:theme="@style/cgeo_material"
+            android:label="@string/map_map" >
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.MULTIWINDOW_LAUNCHER" />
+
+                <!-- ProcessPhoenix uses the default flag to recognize which activity to use after restart -->
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
         <activity
             android:name=".maps.mapsforge.v6.NewMap"
             android:label="@string/map_map" >
@@ -835,6 +867,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="cgeo.geocaching.MainActivity" />
         </activity>
+
+        <!-- 定位需要的服务 使用2.0的定位需要加上这个 -->
+        <service android:name="com.amap.api.location.APSService" >
+        </service>
         
     </application>
 

@@ -1582,4 +1582,17 @@
     <!-- calendar adder -->
     <string name="event_fail">Failed to add event cache to calendar</string>
 
+
+    <!--from appcompat-->
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <string name="main_menu_search">Search</string>
+    <string name="main_menu_filter">Filter</string>
+    <string name="main_menu_add_to_list">Add All to List</string>
+    <string name="main_menu_map">View on Map</string>
+    <string name="main_menu_list">View on List</string>
+
 </resources>

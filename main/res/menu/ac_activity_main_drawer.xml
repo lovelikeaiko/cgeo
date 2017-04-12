@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_find_geocaches"
+            android:icon="@drawable/geocaches"
+            android:title="Find Geocaches" />
+        <item
+            android:id="@+id/nav_messages"
+            android:icon="@drawable/message"
+            android:title="Messages" />
+        <item
+            android:id="@+id/nav_my_list"
+            android:icon="@drawable/list_icon"
+            android:title="My Lists" />
+        <item
+            android:id="@+id/nav_help"
+            android:icon="@drawable/help"
+            android:title="Help" />
+    </group>
+
+    <group >
+        <item
+            android:id="@+id/nav_log_out"
+            android:icon="@drawable/logout"
+            android:title="Log Out" />
+    </group>
+
+
+</menu>

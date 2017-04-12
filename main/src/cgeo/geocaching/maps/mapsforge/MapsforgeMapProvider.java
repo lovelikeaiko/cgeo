@@ -97,6 +97,8 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
     public Class<? extends Activity> getMapClass() {
         mapItemFactory = new MapsforgeMapItemFactory();
         return MapsforgeMapActivity.class;
+        // change for appcompat
+//        return MapsforgeAppCompatMapActivity.class;
     }
 
     @Override
@@ -106,6 +108,7 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
 
     @Override
     public int getMapLayoutId() {
+        //return R.layout.map_mapsforge_material;
         return R.layout.map_mapsforge;
     }
 
