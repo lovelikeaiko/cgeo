@@ -11,11 +11,11 @@ hs_err_pid*.log
 androidannotations.log
 
 # developer specific settings and credentials
-local.properties
-private.properties
+#local.properties
+#private.properties
 /crowdin/credentials
-/main/res/values/mapsapikey.xml
-/main/cgeo.geocaching_preferences.xml
+#/main/res/values/mapsapikey.xml
+#/main/cgeo.geocaching_preferences.xml
 
 /main/project/localization/*.missing
 /main/project/attributes/drawable-mdpi/
