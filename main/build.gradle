@@ -334,15 +334,15 @@ dependencies {
     compile "io.reactivex.rxjava2:rxandroid:2.0.1"
 
     // Support Library. Appcompat
-    compile 'com.android.support:appcompat-v7:20.0.0'
+    compile 'com.android.support:appcompat-v7:25.1.0'
     
     // Support Library RecyclerView
-    compile 'com.android.support:recyclerview-v7:22.0.0'
+    compile 'com.android.support:recyclerview-v7:25.1.0'
     // we don't want to implement decorators on our own
 	compile 'com.yqritc:recyclerview-flexibledivider:1.4.0'
 
     // Support Annotations. enforce same version for the main app and the test app
-    def supportAnnotationsVersion = '24.2.1'
+    def supportAnnotationsVersion = '25.1.0'
     compile "com.android.support:support-annotations:$supportAnnotationsVersion"
     androidTestCompile "com.android.support:support-annotations:$supportAnnotationsVersion"
 
