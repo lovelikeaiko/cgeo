@@ -89,10 +89,12 @@ android {
     
     buildTypes.all { buildType ->
         // enable proguard and remove unused code
-        buildType.minifyEnabled true
+//        buildType.minifyEnabled true
 
         // remove unused resources in addition to unused code
         shrinkResources true
+
+        multiDexEnabled true
 
 		// proguard rules
         buildType.proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt'
@@ -242,6 +244,9 @@ apt {
 
 dependencies {
     // AndroidAnnotations, https://github.com/excilys/androidannotations/wiki/building-project-gradle
+
+    compile 'com.android.support:multidex:1.0.0'
+
     def androidAnnotationsVersion = '4.3.0'
     apt "org.androidannotations:androidannotations:$androidAnnotationsVersion"
     compile "org.androidannotations:androidannotations-api:$androidAnnotationsVersion"
@@ -317,6 +322,9 @@ dependencies {
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
     // Support Library. Appcompat
     compile 'com.android.support:appcompat-v7:24.1.0'
+
+    compile 'com.android.support:design:24.1.0'
+
     // Support Library RecyclerView
     compile 'com.android.support:recyclerview-v7:24.1.0'
     // we don't want to implement decorators on our own

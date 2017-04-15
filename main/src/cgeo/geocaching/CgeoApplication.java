@@ -18,6 +18,7 @@ import android.content.res.Resources;
 import android.os.Build;
 import android.os.UserManager;
 import android.support.annotation.NonNull;
+import android.support.multidex.MultiDex;
 import android.view.ViewConfiguration;
 
 import java.lang.reflect.Field;
@@ -68,6 +69,12 @@ public class CgeoApplication extends Application {
 
         // Attempt to acquire an initial location before any real activity happens.
         sensors.geoDataObservable(true).subscribeOn(AndroidRxUtils.looperCallbacksScheduler).take(1).subscribe();
+    }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
     }
 
     /**

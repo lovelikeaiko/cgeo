@@ -1,8 +1,8 @@
 package cgeo.geocaching.maps.amap;
 
 import android.app.Activity;
+import android.support.annotation.NonNull;
 
-import org.eclipse.jdt.annotation.NonNull;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.maps.AbstractMapProvider;
