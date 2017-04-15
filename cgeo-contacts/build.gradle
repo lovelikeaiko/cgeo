@@ -5,7 +5,7 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 23
+    compileSdkVersion 24
     buildToolsVersion project.buildToolsVersion
 
     compileOptions {
@@ -44,6 +44,10 @@ dependencies {
     compile 'commons-io:commons-io:2.5'
     compile 'org.apache.commons:commons-lang3:3.5'
 
+
+    // Support Library. Appcompat
+    compile 'com.android.support:appcompat-v7:24.1.0'
+
     // Android annotations
-    compile 'com.android.support:support-annotations:24.2.1'
+    compile 'com.android.support:support-annotations:24.1.0'
 }

@@ -20,7 +20,7 @@ import com.amap.api.maps.LocationSource;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.maps.AppCompatAbstractMap;
-import cgeo.geocaching.maps.CGeoMapAppCompat;
+import cgeo.geocaching.maps.CGeoMapNew;
 import cgeo.geocaching.maps.interfaces.AppCompatMapActivityImpl;
 import cgeo.geocaching.utils.Log;
 
@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private final AppCompatAbstractMap mapBase;
 
     public MainActivity(){
-        mapBase = new CGeoMapAppCompat(this);
+        mapBase = new CGeoMapNew(this);
     }
 
     @Override

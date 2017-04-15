@@ -17,7 +17,7 @@ if (isContinuousIntegrationServer()) {
 }
 
 android {
-    compileSdkVersion "Google Inc.:Google APIs:23"
+    compileSdkVersion "Google Inc.:Google APIs:24"
     buildToolsVersion project.buildToolsVersion
 
     compileOptions {
@@ -105,6 +105,7 @@ android {
         main {
             manifest.srcFile 'AndroidManifest.xml'
             java.srcDirs = ['src', 'thirdparty', '../common/src'] // no need for annotation generated sources
+//            res.srcDirs = ['res', '../android-support-v7-appcompat/res']
             res.srcDirs = ['res']
             assets.srcDirs = ['assets']
             aidl.srcDirs = ['src'] // default src/main/aidl creates package name conflicts in Eclipse
@@ -244,61 +245,49 @@ dependencies {
     def androidAnnotationsVersion = '4.3.0'
     apt "org.androidannotations:androidannotations:$androidAnnotationsVersion"
     compile "org.androidannotations:androidannotations-api:$androidAnnotationsVersion"
-
     // Apache Commons
     compile 'org.apache.commons:commons-collections4:4.1'
     compile 'org.apache.commons:commons-compress:1.13'
     compile 'commons-io:commons-io:2.5'
     compile 'org.apache.commons:commons-lang3:3.5'
-
     // AssertJ for testing, needed both for local unit tests and Android instrumentation tests
     def assertJVersion = '2.6.0'
     testCompile "org.assertj:assertj-core:$assertJVersion"
     androidTestCompile "org.assertj:assertj-core:$assertJVersion"
-
     // ButterKnife view injection, https://github.com/JakeWharton/butterknife
     def butterKnifeVersion = '8.4.0'
     compile "com.jakewharton:butterknife:$butterKnifeVersion"
     apt "com.jakewharton:butterknife-compiler:$butterKnifeVersion"
-
     // Findbugs
-    compile ('com.google.code.findbugs:annotations:3.0.1u2') {
+    compile('com.google.code.findbugs:annotations:3.0.1u2') {
         exclude group: 'com.google.code.findbugs', module: 'jsr305'
         exclude group: 'net.jcip', module: 'jcip-annotations'
     }
-
     // GeographicLib
-    compile "net.sf.geographiclib:GeographicLib-Java:1.48"
-
+    compile 'net.sf.geographiclib:GeographicLib-Java:1.48'
     // Jackson XML processing
     def jacksonVersion = '2.8.8'
     compile "com.fasterxml.jackson.core:jackson-core:$jacksonVersion"
     compile "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
     compile "com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion"
-
     // Jsoup HTML parsing
     compile 'org.jsoup:jsoup:1.10.2'
-
     // Junit only needed for local unit tests
     testCompile 'junit:junit:4.12'
-
     // Leak Canary, memory leak detection
     def leakCanaryVersion = '1.5'
     debugCompile "com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion"
-//    releaseCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
-//    nightlyCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
-//    rcCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
-//    legacyCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
+    //    releaseCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
+    //    nightlyCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
+    //    rcCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
+    //    legacyCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
     testCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
-
     // Locus Maps integration
-    compile "com.asamm:locus-api:0.2.8"
-    compile "com.asamm:locus-api-android:0.2.7"
-
+    compile 'com.asamm:locus-api:0.2.8'
+    compile 'com.asamm:locus-api-android:0.2.7'
     // Mapsforge old version
     compile files('libs/mapsforge-map-0.3.0-jar-with-dependencies.jar')
     compile 'com.caverock:androidsvg:1.2.2-beta-1'
-
     // Mapsforge new version
     def mapsforgeVersion = '0.8.0'
     compile "org.mapsforge:mapsforge-core:$mapsforgeVersion"
@@ -309,59 +298,48 @@ dependencies {
     configurations {
         all*.exclude group: 'net.sf.kxml', module: 'kxml2' // duplicate XmlPullParser class
     }
-
     // Maps.ME integration
-    compile project(":mapswithme-api")
-
+    compile project(':mapswithme-api')
     // Metadata Extractor, EXIF location extraction from images
     compile 'com.drewnoakes:metadata-extractor:2.10.1'
-
     // Okhttp network access
     compile 'com.squareup.okhttp3:okhttp:3.6.0'
-
     // Play Services
     def playServicesVersion = '9.4.0'
     compile "com.google.android.gms:play-services-location:$playServicesVersion"
     compile "com.google.android.gms:play-services-appinvite:$playServicesVersion"
     // somehow there is a transitive play service dependency which we don't want
     configurations.all*.exclude module: "play-services-measurement"
-
     // ProcessPhoenix, reliable process restart
     compile 'com.jakewharton:process-phoenix:2.0.0'
-
     // RxJava
-    compile "io.reactivex.rxjava2:rxjava:2.0.8"
-    compile "io.reactivex.rxjava2:rxandroid:2.0.1"
-
+    compile 'io.reactivex.rxjava2:rxjava:2.0.8'
+    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
     // Support Library. Appcompat
-    compile 'com.android.support:appcompat-v7:23.1.0'
-    
+    compile 'com.android.support:appcompat-v7:24.1.0'
     // Support Library RecyclerView
-    compile 'com.android.support:recyclerview-v7:23.1.0'
+    compile 'com.android.support:recyclerview-v7:24.1.0'
     // we don't want to implement decorators on our own
-	compile 'com.yqritc:recyclerview-flexibledivider:1.4.0'
-
+    compile 'com.yqritc:recyclerview-flexibledivider:1.4.0'
     // Support Annotations. enforce same version for the main app and the test app
-    def supportAnnotationsVersion = '25.1.0'
+    def supportAnnotationsVersion = '24.1.0'
     compile "com.android.support:support-annotations:$supportAnnotationsVersion"
     androidTestCompile "com.android.support:support-annotations:$supportAnnotationsVersion"
-
     // Testing Support Library. Android Studio recommended test runner, see https://developer.android.com/tools/testing-support-library/index.html#setup
     androidTestCompile 'com.android.support.test:runner:0.5'
-
     // Undo toast
     compile 'com.github.jenzz.undobar:library:1.3:api8Release@aar'
     compile 'com.nineoldandroids:library:2.4.0'
-
     // ViewPagerIndicator, view pager titles for cache details and similar view pager based activities
     // this is a fork of the original viewpager library which still works with android level 9. we can use 'com.github.JakeWharton:ViewPagerIndicator:2.4.1@aar' when switching to min sdk 11.
     compile 'com.viewpagerindicator:viewpagerindicator:2.4.3'
-
     // Zxing barcode reader integration
     compile 'com.google.zxing:android-integration:3.3.0'
-
     // Espresso TODO: disabled because of causing proguard errors en masse (due to including hamcrest and what else as own dependencies)
     // androidTestCompile 'com.jakewharton.espresso:espresso:1.1-r3'
+    compile files('libs/Android_Map3D_SDK_V4.1.3_20161208.jar')
+    compile files('libs/AMap_Search_V4.0.0_20170111.jar')
+    compile files('libs/AMap_Location_V3.3.0_20170118.jar')
 }
 
 /*

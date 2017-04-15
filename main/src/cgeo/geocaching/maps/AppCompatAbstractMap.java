@@ -47,24 +47,33 @@ public abstract class AppCompatAbstractMap {
         mapActivity.superOnDestroy();
     }
 
-//    public boolean onCreateOptionsMenu(final Menu menu) {
+    public boolean onCreateOptionsMenu(final Menu menu) {
 //        final boolean result = mapActivity.superOnCreateOptionsMenu(menu);
 //        mapActivity.getActivity().getMenuInflater().inflate(R.menu.map_activity, menu);
 //        return result;
-//    }
-//
-//    public boolean onPrepareOptionsMenu(final Menu menu) {
+        return false;
+    }
+
+    public boolean onPrepareOptionsMenu(final Menu menu) {
 //        return mapActivity.superOnPrepareOptionsMenu(menu);
-//    }
-//
-//    public boolean onOptionsItemSelected(final MenuItem item) {
+        return false;
+    }
+
+    public boolean onOptionsItemSelected(final MenuItem item) {
 //        return mapActivity.superOnOptionsItemSelected(item);
-//    }
+        return false;
+    }
 
-    public abstract void onCreate(final Bundle savedInstanceState);
+    public void onCreate(final Bundle savedInstanceState){
 
-    public abstract void onSaveInstanceState(final Bundle outState);
+    }
+
+    public void onSaveInstanceState(final Bundle outState){
+
+    }
 
 
-    public abstract void onLocationChanged(double lat, double lon);
+    public void onLocationChanged(double lat, double lon){
+
+    }
 }
