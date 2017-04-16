@@ -69,22 +69,22 @@ android {
             // code coverage
             testCoverageEnabled isContinuousIntegrationServer()
         }
-//        nightly {
-//            def nightlyName = System.getenv('NB') // NB, NB1, ...
-//            versionNameSuffix "-$nightlyName-" + gitCommitId().substring(0, 7)
-//            signingConfig signingConfigs.release
-//        }
-//        rc {
-//            def rcName = System.getenv('RC') // RC, RC1, RC2 ...
-//            versionNameSuffix "-$rcName"
-//            signingConfig signingConfigs.release
-//        }
-//        legacy {
-//            signingConfig signingConfigs.release
-//        }
-//        release {
-//            signingConfig signingConfigs.release
-//        }
+        nightly {
+            def nightlyName = System.getenv('NB') // NB, NB1, ...
+            versionNameSuffix "-$nightlyName-" + gitCommitId().substring(0, 7)
+            signingConfig signingConfigs.release
+        }
+        rc {
+            def rcName = System.getenv('RC') // RC, RC1, RC2 ...
+            versionNameSuffix "-$rcName"
+            signingConfig signingConfigs.release
+        }
+        legacy {
+            signingConfig signingConfigs.release
+        }
+        release {
+            signingConfig signingConfigs.release
+        }
     }
     
     buildTypes.all { buildType ->
@@ -92,7 +92,7 @@ android {
 //        buildType.minifyEnabled true
 
         // remove unused resources in addition to unused code
-        shrinkResources true
+        shrinkResources false
 
         multiDexEnabled true
 
@@ -282,10 +282,10 @@ dependencies {
     // Leak Canary, memory leak detection
     def leakCanaryVersion = '1.5'
     debugCompile "com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion"
-    //    releaseCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
-    //    nightlyCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
-    //    rcCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
-    //    legacyCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
+    releaseCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
+    nightlyCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
+    rcCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
+    legacyCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
     testCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
     // Locus Maps integration
     compile 'com.asamm:locus-api:0.2.8'
