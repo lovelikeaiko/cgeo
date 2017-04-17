@@ -33,15 +33,15 @@ android {
         targetSdkVersion 22
         versionName versionNameFromDate()
         versionCode versionCodeFromDate(0)
-
-        // NOTE: must match the package in the test directory and must be different from the app package
-        testApplicationId "cgeo.geocaching.test"
-
-        //testHandlingProfiling true
-        testFunctionalTest true
-
-        // set the default test runner to be used by IDE and command line
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+//
+//        // NOTE: must match the package in the test directory and must be different from the app package
+//        testApplicationId "cgeo.geocaching.test"
+//
+//        //testHandlingProfiling true
+//        testFunctionalTest true
+//
+//        // set the default test runner to be used by IDE and command line
+//        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         // by convention, the folder name "main" is used for the APK file name. we want cgeo instead
         archivesBaseName = "cgeo"
@@ -63,25 +63,25 @@ android {
             // debug build name contains git commit for better reproduction of bugs
             versionNameSuffix "-" + gitCommitId().substring(0, 7) + " developer build"
 
-            // additional proguard rules just for the test code
-			testProguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt', '../tests/proguard-project.txt'
-
-            // code coverage
-            testCoverageEnabled isContinuousIntegrationServer()
+//            // additional proguard rules just for the test code
+//			testProguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt', '../tests/proguard-project.txt'
+//
+//            // code coverage
+//            testCoverageEnabled isContinuousIntegrationServer()
         }
-        nightly {
-            def nightlyName = System.getenv('NB') // NB, NB1, ...
-            versionNameSuffix "-$nightlyName-" + gitCommitId().substring(0, 7)
-            signingConfig signingConfigs.release
-        }
-        rc {
-            def rcName = System.getenv('RC') // RC, RC1, RC2 ...
-            versionNameSuffix "-$rcName"
-            signingConfig signingConfigs.release
-        }
-        legacy {
-            signingConfig signingConfigs.release
-        }
+//        nightly {
+//            def nightlyName = System.getenv('NB') // NB, NB1, ...
+//            versionNameSuffix "-$nightlyName-" + gitCommitId().substring(0, 7)
+//            signingConfig signingConfigs.release
+//        }
+//        rc {
+//            def rcName = System.getenv('RC') // RC, RC1, RC2 ...
+//            versionNameSuffix "-$rcName"
+//            signingConfig signingConfigs.release
+//        }
+//        legacy {
+//            signingConfig signingConfigs.release
+//        }
         release {
             signingConfig signingConfigs.release
         }
@@ -100,7 +100,7 @@ android {
         buildType.proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt'
     }
 
-    testBuildType "debug" //the default BuildType
+//    testBuildType "debug" //the default BuildType
 
     sourceSets {
     	// application sources in source set "main"
@@ -113,36 +113,36 @@ android {
             aidl.srcDirs = ['src'] // default src/main/aidl creates package name conflicts in Eclipse
             jni.srcDirs = []
         }
-        // local unit tests, which can be executed without a device
-        test {
-            setRoot("../tests")
-            manifest.srcFile '../tests/AndroidManifest.xml'
-            java.srcDir '../tests/src'
-            resources.srcDirs = ['../tests/src']
-            res.srcDirs = ['../tests/res']
-        }
-        // device/emulator based instrumentation tests in source set "androidTest"
-        androidTest{
-            // map tests to the Eclipse style test project instead of the default app/src/androidTest/java
-            setRoot("../tests")
-            manifest.srcFile '../tests/AndroidManifest.xml'
-            java {
-                srcDir '../tests/src-android'
-
-                // TODO: espresso causes some dependency conflicts, therefore disable espresso tests temporarily
-                exclude '**/*EspressoTest.java'
-                exclude '**/*LogTrackableActivityTest.java'
-                exclude '**/activity/waypoint/*Waypoint*Test.java'
-            }
-            resources.srcDirs = ['../tests/src']
-            res.srcDirs = ['../tests/res']
-        }
+//        // local unit tests, which can be executed without a device
+//        test {
+//            setRoot("../tests")
+//            manifest.srcFile '../tests/AndroidManifest.xml'
+//            java.srcDir '../tests/src'
+//            resources.srcDirs = ['../tests/src']
+//            res.srcDirs = ['../tests/res']
+//        }
+//        // device/emulator based instrumentation tests in source set "androidTest"
+//        androidTest{
+//            // map tests to the Eclipse style test project instead of the default app/src/androidTest/java
+//            setRoot("../tests")
+//            manifest.srcFile '../tests/AndroidManifest.xml'
+//            java {
+//                srcDir '../tests/src-android'
+//
+//                // TODO: espresso causes some dependency conflicts, therefore disable espresso tests temporarily
+//                exclude '**/*EspressoTest.java'
+//                exclude '**/*LogTrackableActivityTest.java'
+//                exclude '**/activity/waypoint/*Waypoint*Test.java'
+//            }
+//            resources.srcDirs = ['../tests/src']
+//            res.srcDirs = ['../tests/res']
+//        }
         // TODO: the package cgeo.geocaching.test.mock is currently duplicated in both "src" and "src-android". if a shared source folder is used instead, then we get java.lang.VerificationExceptions, because the 2 unit test frameworks modify the classes in different ways
     }
 
-    testOptions {
-        resultsDir = "$project.buildDir/build/test-results"
-    }
+//    testOptions {
+//        resultsDir = "$project.buildDir/build/test-results"
+//    }
 
     lintOptions {
     	// generally we accept lint errors when building 
@@ -283,10 +283,10 @@ dependencies {
     def leakCanaryVersion = '1.5'
     debugCompile "com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion"
     releaseCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
-    nightlyCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
-    rcCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
-    legacyCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
-    testCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
+//    nightlyCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
+//    rcCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
+//    legacyCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
+//    testCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
     // Locus Maps integration
     compile 'com.asamm:locus-api:0.2.8'
     compile 'com.asamm:locus-api-android:0.2.7'
