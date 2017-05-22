@@ -2,6 +2,7 @@ package cgeo.geocaching.newmap.amap;
 
 import android.support.v4.app.Fragment;
 
+import com.amap.api.maps.AMap;
 import com.amap.api.maps.SupportMapFragment;
 
 import cgeo.geocaching.newmap.fragment.FragmentFactory;
@@ -12,15 +13,22 @@ import cgeo.geocaching.newmap.fragment.FragmentFactory;
 
 public class AMapFragmentFactory extends FragmentFactory {
 
+    private AMap mAMap;
+
     @Override
     public Fragment createFragment() {
         return new AMapMapFragment();
     }
 
+    public AMap getAMap(){
+        return mAMap;
+    }
+
     @Override
     public void getMapAsync(Fragment mapFragment) {
         if (mapFragment instanceof SupportMapFragment){
-            ((SupportMapFragment)mapFragment).get
+            mAMap = ((SupportMapFragment)mapFragment).getMap();
+            notifyOnMapReadyCallback();
         }
     }
 }

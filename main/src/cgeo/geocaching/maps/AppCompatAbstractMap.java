@@ -65,7 +65,6 @@ public abstract class AppCompatAbstractMap {
     }
 
     public void onCreate(final Bundle savedInstanceState){
-
     }
 
     public void onSaveInstanceState(final Bundle outState){

@@ -19,6 +19,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.maps.AppCompatAbstractMap;
 import cgeo.geocaching.maps.interfaces.AppCompatMapActivityImpl;
 import cgeo.geocaching.maps.interfaces.MapProvider;
+import cgeo.geocaching.newmap.interfaces.MapApiImpl;
 import cgeo.geocaching.newmap.interfaces.OnMapReadyCallback;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
@@ -33,6 +34,10 @@ public abstract class BaseMapActivity extends AppCompatActivity implements Navig
     private final AppCompatAbstractMap mapBase;
 
     private FrameLayout mapContainer;
+
+    MapProvider mapProvider;
+
+    private MapApiImpl mapApi;
 
     public BaseMapActivity() {
         mapBase = new NewCGeoMap(this);
@@ -68,11 +73,11 @@ public abstract class BaseMapActivity extends AppCompatActivity implements Navig
 
         mapContainer = (FrameLayout) findViewById(R.id.map_container);
         if (mapContainer != null) {
-            final MapProvider mapProvider = Settings.getMapProvider();
+            mapProvider = Settings.getMapProvider();
             Fragment mapFragment = mapProvider.getFragmentFactory().createFragment();
             if (mapFragment != null) {
                 addFragment(R.id.map_container, mapFragment);
-                mapProvider.getFragmentFactory().getMapAsync(mapFragment, );
+                mapProvider.getFragmentFactory().getMapAsync(mapFragment);
             }
         }
         mapBase.onCreate(savedInstanceState);
@@ -81,7 +86,7 @@ public abstract class BaseMapActivity extends AppCompatActivity implements Navig
 
     @Override
     public void onMapReady() {
-
+        mapApi = mapProvider.createMapApi();
     }
 
     @Override

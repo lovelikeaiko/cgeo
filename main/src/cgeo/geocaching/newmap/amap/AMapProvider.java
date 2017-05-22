@@ -10,6 +10,7 @@ import cgeo.geocaching.maps.interfaces.MapItemFactory;
 import cgeo.geocaching.maps.interfaces.MapProvider;
 import cgeo.geocaching.maps.interfaces.MapSource;
 import cgeo.geocaching.newmap.fragment.FragmentFactory;
+import cgeo.geocaching.newmap.interfaces.MapApiImpl;
 
 /**
  * Created by paint on 17-5-22.
@@ -20,7 +21,7 @@ public class AMapProvider extends AbstractMapProvider {
     public static final String AMAP_BASE_ID = "AMAP_BASE";
     public static final String AMAP_SATELLITE_ID = "AMAP_SATELLITE";
 
-    private FragmentFactory fragmentFactory;
+    private AMapFragmentFactory fragmentFactory;
 
 
     public AMapProvider() {
@@ -67,6 +68,11 @@ public class AMapProvider extends AbstractMapProvider {
     @Override
     public MapItemFactory getMapItemFactory() {
         return null;
+    }
+
+    @Override
+    public MapApiImpl createMapApi() {
+        return new SupportMapFragmentMapApi(fragmentFactory.getAMap());
     }
 
     private abstract static class AbstractAMapMapSource extends AbstractMapSource {

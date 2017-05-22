@@ -28,4 +28,10 @@ public abstract class FragmentFactory {
     public void removeOnMapReadyCallback(OnMapReadyCallback callback){
         mOnMapReadyCallbacks.remove(callback);
     }
+
+    protected void notifyOnMapReadyCallback() {
+        for (OnMapReadyCallback callback : mOnMapReadyCallbacks) {
+            callback.onMapReady();
+        }
+    }
 }

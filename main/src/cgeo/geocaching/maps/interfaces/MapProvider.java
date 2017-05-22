@@ -3,6 +3,7 @@ package cgeo.geocaching.maps.interfaces;
 import android.app.Activity;
 
 import cgeo.geocaching.newmap.fragment.FragmentFactory;
+import cgeo.geocaching.newmap.interfaces.MapApiImpl;
 
 /**
  * Defines functions of a factory class to get implementation specific objects
@@ -27,4 +28,6 @@ public interface MapProvider {
     MapItemFactory getMapItemFactory();
 
     void registerMapSource(final MapSource mapSource);
+
+    MapApiImpl createMapApi();
 }
