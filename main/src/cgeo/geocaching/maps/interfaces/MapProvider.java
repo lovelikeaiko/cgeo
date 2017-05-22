@@ -2,6 +2,8 @@ package cgeo.geocaching.maps.interfaces;
 
 import android.app.Activity;
 
+import cgeo.geocaching.newmap.fragment.FragmentFactory;
+
 /**
  * Defines functions of a factory class to get implementation specific objects
  * (GeoPoints, OverlayItems, ...)
@@ -14,7 +16,13 @@ public interface MapProvider {
 
     int getMapViewId();
 
+    /**
+     * fragment的layout
+     * @return
+     */
     int getMapLayoutId();
+
+    FragmentFactory getFragmentFactory();
 
     MapItemFactory getMapItemFactory();
 

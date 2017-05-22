@@ -17,6 +17,9 @@ import android.graphics.drawable.Drawable;
  */
 public abstract class AbstractItemizedOverlay implements GeneralOverlay {
 
+    /**
+     * 就是外面的MapsforgeCacheOverlay等对象
+     */
     private final ItemizedOverlayImpl ovlImpl;
 
     protected AbstractItemizedOverlay(final ItemizedOverlayImpl ovlImplIn) {

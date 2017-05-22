@@ -34,6 +34,8 @@ public class MapsforgeCacheOverlay extends ItemizedOverlay<MapsforgeCacheOverlay
         return base;
     }
 
+    //绘制Overlay的时候，会回调createItem来绘制每一个item。这也就拿到了之前更新在CachesOverlay中的item.
+    //item的接口中，setMarker和getMarker最重要
     @Override
     protected MapsforgeCacheOverlayItem createItem(final int i) {
         return (MapsforgeCacheOverlayItem) base.createItem(i);
@@ -49,6 +51,7 @@ public class MapsforgeCacheOverlay extends ItemizedOverlay<MapsforgeCacheOverlay
         return base.onTap(arg0);
     }
 
+    //这个方法是Mapsforge底层绘制Overlay的时候，回调过来的，传给你一个canvas，随便你怎么绘制
     @Override
     protected void drawOverlayBitmap(final Canvas canvas, final Point drawPosition,
             final Projection projection, final byte drawZoomLevel) {

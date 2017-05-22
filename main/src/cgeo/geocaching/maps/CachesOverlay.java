@@ -118,8 +118,11 @@ public class CachesOverlay extends AbstractItemizedOverlay {
     public void drawOverlayBitmap(final Canvas canvas, final Point drawPosition,
             final MapProjectionImpl projection, final byte drawZoomLevel) {
 
+        //先画了两个圈
         drawInternal(canvas, projection);
 
+        //然后间接调用外部的MapsforgeCacheOverlay继续绘制，这就会调用v3包中ItemizedOverlay的drawOverlayBitmap。
+        //这个时候就会绘制之前设置的marker
         super.drawOverlayBitmap(canvas, drawPosition, projection, drawZoomLevel);
     }
 

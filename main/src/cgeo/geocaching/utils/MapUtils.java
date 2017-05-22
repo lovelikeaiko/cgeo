@@ -179,7 +179,7 @@ public final class MapUtils {
         // background: disabled or not
         final Drawable marker = Compatibility.getDrawable(res, cache.getMapMarkerId());
         final int resolution = calculateResolution(marker);
-        // Show the background circle only on map
+        // Show the background circle only on map, 比如cache disable或者被回收之后，要显示灰色背景
         if (showBackground(cacheListType)) {
             layers.add(marker);
             insets.add(INSET_RELIABLE[resolution]);

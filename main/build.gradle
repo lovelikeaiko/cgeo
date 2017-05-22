@@ -17,7 +17,8 @@ if (isContinuousIntegrationServer()) {
 }
 
 android {
-    compileSdkVersion "Google Inc.:Google APIs:24"
+//    compileSdkVersion "Google Inc.:Google APIs:24"
+    compileSdkVersion 25
     buildToolsVersion project.buildToolsVersion
 
     compileOptions {
@@ -315,6 +316,9 @@ dependencies {
     def playServicesVersion = '9.4.0'
     compile "com.google.android.gms:play-services-location:$playServicesVersion"
     compile "com.google.android.gms:play-services-appinvite:$playServicesVersion"
+
+    compile 'com.google.android.gms:play-services-maps:9.4.0'
+
     // somehow there is a transitive play service dependency which we don't want
     configurations.all*.exclude module: "play-services-measurement"
     // ProcessPhoenix, reliable process restart

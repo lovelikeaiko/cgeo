@@ -20,4 +20,8 @@ public interface AppCompatMapActivityImpl {
     void superOnStop();
 
     void superOnPause();
+
+    void onMapSourceChanged(int oldSource, int newSource);
+
+
 }
