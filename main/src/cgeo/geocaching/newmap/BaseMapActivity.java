@@ -134,21 +134,25 @@ public abstract class BaseMapActivity extends AppCompatActivity implements Navig
     @Override
     protected void onDestroy() {
         mapBase.onDestroy();
+        mapApi.mapOnDestroy();
     }
 
     @Override
     protected void onPause() {
         mapBase.onPause();
+        mapApi.mapOnPause();
     }
 
     @Override
     protected void onResume() {
         mapBase.onResume();
+        mapApi.mapOnResume();
     }
 
     @Override
     protected void onStop() {
         mapBase.onStop();
+        mapApi.mapOnStop();
     }
 
     @Override

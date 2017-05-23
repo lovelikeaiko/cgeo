@@ -141,7 +141,7 @@ public class NewCGeoMap extends AppCompatAbstractMap {
     private Activity activity;
     private MapItemFactory mapItemFactory;
     private final LeastRecentlyUsedSet<Geocache> caches = new LeastRecentlyUsedSet<>(MAX_CACHES + DataStore.getAllCachesCount());
-    private MapViewImpl mapView;
+//    private MapViewImpl mapView;
 //    private CachesOverlay overlayCaches;
 //    private PositionAndScaleOverlay overlayPositionAndScale;
 
@@ -390,7 +390,6 @@ public class NewCGeoMap extends AppCompatAbstractMap {
         outState.putBoolean(BUNDLE_LIVE_ENABLED, mapOptions.isLiveEnabled);
 //        outState.putParcelableArrayList(BUNDLE_TRAIL_HISTORY, overlayPositionAndScale.getHistory());
 
-        mAmapMapView.onSaveInstanceState(outState);
     }
 
     //TODO temp add
@@ -1299,6 +1298,7 @@ public class NewCGeoMap extends AppCompatAbstractMap {
 
         Log.w("getCurrViewport, latspan=" + getLatitudeSpan() + ", lonspan=" + getLongitudeSpan()
                 + ", visibleregion=" + getVisibleRegion());
+
         return new Viewport(new AMapGeoPoint(mLat, mLon), getLatitudeSpan() / 1e6, getLongitudeSpan() / 1e6);
     }
 

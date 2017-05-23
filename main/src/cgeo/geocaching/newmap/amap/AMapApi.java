@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 import cgeo.geocaching.maps.amap.AMapGeoPoint;
 import cgeo.geocaching.maps.interfaces.GeoPointImpl;
+import cgeo.geocaching.newmap.BaseMapApi;
 import cgeo.geocaching.newmap.data.BitmapDescriptor;
 import cgeo.geocaching.newmap.data.MarkerOptionsInfo;
 import cgeo.geocaching.newmap.interfaces.BuildMarkerOpionInfoCallback;
@@ -24,7 +25,7 @@ import cgeo.geocaching.newmap.interfaces.MapApiImpl;
  * Created by paint on 17-5-22.
  */
 
-public abstract class AMapApi implements MapApiImpl {
+public abstract class AMapApi extends BaseMapApi {
 
 
     private final float DEFAULT_ZOOM_LEVEL = 12;
@@ -151,7 +152,7 @@ public abstract class AMapApi implements MapApiImpl {
     };
 
     @Override
-    public void addMarker(MarkerOptionsInfo info) {
+    public void addMarkerInMainThread(MarkerOptionsInfo info) {
         MarkerOptions markerOptions = getMarkerOptions(info.getIconInfo(), info.getOptionsSetState());
         if (markerOptions==null){
             info.buildMarkerOpionInfo(mBuildCallback);
@@ -186,6 +187,7 @@ public abstract class AMapApi implements MapApiImpl {
         if (enable){
             mAMap.setMyLocationType(AMap.LOCATION_TYPE_LOCATE);
         }
+
     }
 
     private void changeCamera(CameraUpdate update, AMap.CancelableCallback callback) {
