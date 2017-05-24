@@ -38,6 +38,7 @@ public class MarkerOptionsInfo {
     private int displayLevel;
     private float rotateAngle;
     private boolean infoWindowEnable;
+    private boolean isClicked;
 
 
 
@@ -60,6 +61,7 @@ public class MarkerOptionsInfo {
     private final static int SET_DISPALY_LEVEL = 16;
     private final static int SET_ROTATE_ANGLE = 17;
     private final static int SET_INFO_WINDOW_ENABLE = 18;
+    private final static int SET_IS_CLICKED = 19;
 
     public final static int FLAG_ICONS = 1;
     public final static int FLAG_PERIOD = 1<<SET_PERIOD;
@@ -80,6 +82,7 @@ public class MarkerOptionsInfo {
     public final static int FLAG_DISPALY_LEVEL = 1<<SET_DISPALY_LEVEL;
     public final static int FLAG_ROTATE_ANGLE = 1<<SET_ROTATE_ANGLE;
     public final static int FLAG_INFO_WINDOW_ENABLE = 1<<SET_INFO_WINDOW_ENABLE;
+    public final static int FLAG_IS_CLICKED = 1<<SET_IS_CLICKED;
 
     private int optionsSetState = 0;
 
@@ -99,8 +102,27 @@ public class MarkerOptionsInfo {
         optionsSetState |= flag;
     }
 
+    private void clearState(int flag){
+        optionsSetState &= (~flag);
+    }
+
     public boolean isSet(int flag){
         return (optionsSetState & (~flag))==0;
+    }
+
+
+    public void setIsClicked(boolean clicked){
+        this.isClicked = clicked;
+        if(clicked){
+            setState(SET_IS_CLICKED);
+        }else{
+            clearState(SET_IS_CLICKED);
+        }
+
+    }
+
+    public boolean isClicked(){
+        return isClicked;
     }
 
     public void icons(ArrayList<BitmapDescriptor> icons) {
@@ -133,7 +155,11 @@ public class MarkerOptionsInfo {
     /** @deprecated */
     public void perspective(boolean perspective) {
         this.perspective = perspective;
-        setState(FLAG_PERSPECTIVE);
+        if(perspective){
+            setState(FLAG_PERSPECTIVE);
+        }else{
+            clearState(FLAG_PERSPECTIVE);
+        }
     }
 
     public MarkerOptionsInfo() {
@@ -149,7 +175,11 @@ public class MarkerOptionsInfo {
 
     public void setFlat(boolean flat) {
         this.flat = flat;
-        setState(FLAG_FLAT);
+        if(flat){
+            setState(FLAG_FLAT);
+        }else{
+            clearState(FLAG_FLAT);
+        }
     }
 
     private void initIconsArray() {
@@ -205,17 +235,29 @@ public class MarkerOptionsInfo {
 
     public void draggable(boolean draggable) {
         this.draggable = draggable;
-        setState(FLAG_DRAGGABLE);
+        if(draggable){
+            setState(FLAG_DRAGGABLE);
+        }else{
+            clearState(FLAG_DRAGGABLE);
+        }
     }
 
     public void visible(boolean visible) {
         this.visible = visible;
-        setState(FLAG_VISIBLE);
+        if(visible){
+            setState(FLAG_VISIBLE);
+        }else{
+            clearState(FLAG_VISIBLE);
+        }
     }
 
     public void setGps(boolean gps) {
         this.gps = gps;
-        setState(FLAG_GPS);
+        if(gps){
+            setState(FLAG_GPS);
+        }else{
+            clearState(FLAG_GPS);
+        }
     }
 
     public void zIndex(float zIndex) {
@@ -240,7 +282,11 @@ public class MarkerOptionsInfo {
 
     public void infoWindowEnable(boolean infoWindowEnable) {
         this.infoWindowEnable = infoWindowEnable;
-        setState(FLAG_INFO_WINDOW_ENABLE);
+        if(infoWindowEnable){
+            setState(FLAG_INFO_WINDOW_ENABLE);
+        }else{
+            clearState(FLAG_INFO_WINDOW_ENABLE);
+        }
     }
 
     public LatLng getPosition() {
@@ -369,6 +415,10 @@ public class MarkerOptionsInfo {
         }
         if(isSet(FLAG_INFO_WINDOW_ENABLE)){
             callback.infoWindowEnable(infoWindowEnable);
+        }
+
+        if(isSet(FLAG_IS_CLICKED)){
+            callback.isClicked(isClicked);
         }
     }
 

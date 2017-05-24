@@ -13,30 +13,33 @@ public class BitmapDescriptor implements Parcelable, Cloneable {
     int width = 0;
     int height = 0;
     Bitmap bitmap;
+    int hashCode = 0;
 
-    BitmapDescriptor(Bitmap var1) {
-        if(var1 != null) {
-            this.width = var1.getWidth();
-            this.height = var1.getHeight();
+    BitmapDescriptor(Bitmap bitmap, int hashCode) {
+        if(bitmap != null) {
+            this.width = bitmap.getWidth();
+            this.height = bitmap.getHeight();
+            this.hashCode = hashCode;
 
             try {
-                this.bitmap = var1.copy(var1.getConfig(), false);
-            } catch (Throwable var3) {
-                var3.printStackTrace();
+                this.bitmap = bitmap.copy(bitmap.getConfig(), false);
+            } catch (Throwable e) {
+                e.printStackTrace();
             }
         }
 
     }
 
-    private BitmapDescriptor(Bitmap var1, int var2, int var3) {
-        this.width = var2;
-        this.height = var3;
-        this.bitmap = var1;
+    private BitmapDescriptor(Bitmap bitmap, int width, int height, int hashCode) {
+        this.width = width;
+        this.height = height;
+        this.bitmap = bitmap;
+        this.hashCode = hashCode;
     }
 
     public BitmapDescriptor clone() {
         try {
-            BitmapDescriptor var1 = new BitmapDescriptor(Bitmap.createBitmap(this.bitmap), this.width, this.height);
+            BitmapDescriptor var1 = new BitmapDescriptor(Bitmap.createBitmap(this.bitmap), this.width, this.height, this.hashCode);
             return var1;
         } catch (Throwable var2) {
             var2.printStackTrace();
@@ -56,6 +59,10 @@ public class BitmapDescriptor implements Parcelable, Cloneable {
         return this.height;
     }
 
+    public int getHashCode() {
+        return this.hashCode;
+    }
+
     public int describeContents() {
         return 0;
     }
@@ -64,6 +71,7 @@ public class BitmapDescriptor implements Parcelable, Cloneable {
         var1.writeParcelable(this.bitmap, var2);
         var1.writeInt(this.width);
         var1.writeInt(this.height);
+        var1.writeInt(this.hashCode);
     }
 
     public void recycle() {
@@ -87,7 +95,8 @@ public class BitmapDescriptor implements Parcelable, Cloneable {
                 if(var2.bitmap != null && !var2.bitmap.isRecycled()) {
                     if(this.width == var2.getWidth() && this.height == var2.getHeight()) {
                         try {
-                            return this.bitmap.sameAs(var2.bitmap);
+//                            return this.bitmap.sameAs(var2.bitmap);
+                            return this.hashCode==var2.hashCode;
                         } catch (Throwable var4) {
                             return false;
                         }
@@ -104,6 +113,6 @@ public class BitmapDescriptor implements Parcelable, Cloneable {
     }
 
     public int hashCode() {
-        return super.hashCode();
+        return hashCode;
     }
 }

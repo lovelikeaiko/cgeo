@@ -29,15 +29,10 @@ import cgeo.geocaching.utils.Log;
  */
 
 public abstract class BaseMapActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
-        AppCompatMapActivityImpl, OnMapReadyCallback {
+        AppCompatMapActivityImpl {
 
     private final AppCompatAbstractMap mapBase;
 
-    private FrameLayout mapContainer;
-
-    MapProvider mapProvider;
-
-    private MapApiImpl mapApi;
 
     public BaseMapActivity() {
         mapBase = new NewCGeoMap(this);
@@ -71,39 +66,14 @@ public abstract class BaseMapActivity extends AppCompatActivity implements Navig
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        mapContainer = (FrameLayout) findViewById(R.id.map_container);
-        if (mapContainer != null) {
-            mapProvider = Settings.getMapProvider();
-            Fragment mapFragment = mapProvider.getFragmentFactory().createFragment();
-            if (mapFragment != null) {
-                addFragment(R.id.map_container, mapFragment);
-                mapProvider.getFragmentFactory().getMapAsync(mapFragment);
-            }
-        }
+
         mapBase.onCreate(savedInstanceState);
 
     }
 
     @Override
-    public void onMapReady() {
-        mapApi = mapProvider.createMapApi();
-    }
-
-    @Override
     public void onMapSourceChanged(int oldSource, int newSource) {
 
-    }
-
-    private void addFragment(int containerViewId, Fragment fragment) {
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.add(containerViewId, fragment);
-        ft.commitAllowingStateLoss();
-    }
-
-    private void replaceFragment(int containerViewId, Fragment fragment) {
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(containerViewId, fragment);
-        ft.commitAllowingStateLoss();
     }
 
 //    /**
@@ -134,25 +104,21 @@ public abstract class BaseMapActivity extends AppCompatActivity implements Navig
     @Override
     protected void onDestroy() {
         mapBase.onDestroy();
-        mapApi.mapOnDestroy();
     }
 
     @Override
     protected void onPause() {
         mapBase.onPause();
-        mapApi.mapOnPause();
     }
 
     @Override
     protected void onResume() {
         mapBase.onResume();
-        mapApi.mapOnResume();
     }
 
     @Override
     protected void onStop() {
         mapBase.onStop();
-        mapApi.mapOnStop();
     }
 
     @Override

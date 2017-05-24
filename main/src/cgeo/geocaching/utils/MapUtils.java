@@ -8,6 +8,10 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
 
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.PixelFormat;
 import android.support.annotation.NonNull;
 
 import android.content.res.Resources;
@@ -35,6 +39,7 @@ public final class MapUtils {
     private static final int[][] INSET_PERSONALNOTE_LIST = { { 0, 14, 16, 2 }, { 0, 19, 22, 3 }, { 0, 28, 33, 4 }, { 0, 38, 44, 6 }, { 0, 57, 66, 9 }, { 0, 76, 88, 12 } };
 
     private static final SparseArray<LayerDrawable> overlaysCache = new SparseArray<>();
+    private static final SparseArray<Bitmap> cacheMarkerBitmapCache = new SparseArray<>();
 
     private MapUtils() {
         // Do not instantiate
@@ -98,6 +103,42 @@ public final class MapUtils {
         }
     }
 
+    public static Bitmap getCacheBitmapMarker(final Resources res, final Geocache cache, @Nullable final CacheListType cacheListType) {
+        final int hashcode = new HashCodeBuilder()
+                .append(cache.isReliableLatLon())
+                .append(cache.getType().id)
+                .append(cache.isDisabled() || cache.isArchived())
+                .append(cache.getMapMarkerId())
+                .append(cache.isOwner())
+                .append(cache.isFound())
+                .append(showUserModifiedCoords(cache))
+                .append(cache.getPersonalNote())
+                .append(cache.isLogOffline())
+                .append(!cache.getLists().isEmpty())
+                .append(cache.getOfflineLogType())
+                .append(showBackground(cacheListType))
+                .append(showFloppyOverlay(cacheListType))
+                .toHashCode();
+
+        synchronized (overlaysCache) {
+            LayerDrawable drawable = overlaysCache.get(hashcode);
+            if (drawable == null) {
+                drawable = createCacheMarker(res, cache, cacheListType);
+                overlaysCache.put(hashcode, drawable);
+                Bitmap bitmap = Bitmap.createBitmap(
+                        drawable.getIntrinsicWidth(),
+                        drawable.getIntrinsicHeight(),
+                        drawable.getOpacity() != PixelFormat.OPAQUE ? Bitmap.Config.ARGB_8888
+                                : Bitmap.Config.RGB_565);
+                Canvas canvas = new Canvas(bitmap);
+                drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
+                drawable.draw(canvas);
+                cacheMarkerBitmapCache.put(hashcode, bitmap);
+            }
+            return cacheMarkerBitmapCache.get(hashcode);
+        }
+    }
+
     /**
      * Obtain the drawable for a given waypoint.
      * Return a drawable from the cache, if a similar drawable was already generated.
@@ -123,6 +164,32 @@ public final class MapUtils {
                 overlaysCache.put(hashcode, drawable);
             }
             return drawable;
+        }
+    }
+
+
+    public static Bitmap getWaypointBitmapMarker(final Resources res, final Waypoint waypoint) {
+        final int hashcode = new HashCodeBuilder()
+                .append(waypoint.isVisited())
+                .append(waypoint.getWaypointType().id)
+                .toHashCode();
+
+        synchronized (overlaysCache) {
+            LayerDrawable drawable = overlaysCache.get(hashcode);
+            if (drawable == null) {
+                drawable = createWaypointMarker(res, waypoint);
+                overlaysCache.put(hashcode, drawable);
+                Bitmap bitmap = Bitmap.createBitmap(
+                        drawable.getIntrinsicWidth(),
+                        drawable.getIntrinsicHeight(),
+                        drawable.getOpacity() != PixelFormat.OPAQUE ? Bitmap.Config.ARGB_8888
+                                : Bitmap.Config.RGB_565);
+                Canvas canvas = new Canvas(bitmap);
+                drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
+                drawable.draw(canvas);
+                cacheMarkerBitmapCache.put(hashcode, bitmap);
+            }
+            return cacheMarkerBitmapCache.get(hashcode);
         }
     }
 

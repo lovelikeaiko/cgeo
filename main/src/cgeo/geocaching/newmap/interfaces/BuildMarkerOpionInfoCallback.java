@@ -63,4 +63,6 @@ public interface BuildMarkerOpionInfoCallback {
 
     public void infoWindowEnable(boolean infoWindowEnable);
 
+    public void isClicked(boolean isClicked);
+
 }

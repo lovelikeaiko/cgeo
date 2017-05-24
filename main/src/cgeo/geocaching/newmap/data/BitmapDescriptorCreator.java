@@ -13,10 +13,11 @@ public class BitmapDescriptorCreator implements Parcelable.Creator<BitmapDescrip
     }
 
     public BitmapDescriptor createFromParcel(Parcel var1) {
-        BitmapDescriptor var2 = new BitmapDescriptor((Bitmap)null);
-        var2.c = (Bitmap)var1.readParcelable(BitmapDescriptor.class.getClassLoader());
-        var2.a = var1.readInt();
-        var2.b = var1.readInt();
+        BitmapDescriptor var2 = new BitmapDescriptor((Bitmap)null, 0);
+        var2.bitmap = (Bitmap)var1.readParcelable(BitmapDescriptor.class.getClassLoader());
+        var2.width = var1.readInt();
+        var2.height = var1.readInt();
+        var2.hashCode = var1.readInt();
         return var2;
     }
 
