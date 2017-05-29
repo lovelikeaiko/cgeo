@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Google Maps -->
+    <string name="maps_api_key" translatable="false">AIzaSyBXda_kprZIWIZjDmzRXpC0fLs56eXTG-8</string>
+
+    <!-- Opencaching.de -->
+    <string name="oc_de_okapi_consumer_key" translatable="false">86QBcASSksAXcW53Mbgy</string>
+    <string name="oc_de_okapi_consumer_secret" translatable="false">z2Nm6AmwmkdkgULkmv3xLukPffHThPgHGVTCm5Yy</string>
+
+    <!-- Opencaching.pl -->
+    <string name="oc_pl_okapi_consumer_key" translatable="false">zfKtr6xBeTkbuUzfXwcT</string>
+    <string name="oc_pl_okapi_consumer_secret" translatable="false">8GgcUuAABDq2KZjZVFtZrC3JnsQbNSUMq3PameAN</string>
+
+    <!-- Opencaching.us -->
+    <string name="oc_us_okapi_consumer_key" translatable="false">dmuNfH52CvMRPGfDXNQM</string>
+    <string name="oc_us_okapi_consumer_secret" translatable="false">fDrZHMM8dnahzvVE4Rwwc9dRFkkuX264vmT4Yw33</string>
+
+    <!-- Opencaching.nl -->
+    <string name="oc_nl_okapi_consumer_key" translatable="false">6q3vWXpbM3BQC7NgtJHr</string>
+    <string name="oc_nl_okapi_consumer_secret" translatable="false">RHFQVmGdmnFhBzCpnQrZJRFcNkj7TSpBrTgc6Pgg</string>
+
+    <!-- Opencaching.ro -->
+    <string name="oc_ro_okapi_consumer_key" translatable="false">VufttvHXjAcuhrDCYWBn</string>
+    <string name="oc_ro_okapi_consumer_secret" translatable="false">DjjDmU9x9mmsnmgDSFJTFZRtkGg9FJDJxmmrxTTR</string>
+
+    <!-- Opencaching.org.uk -->
+    <string name="oc_uk_okapi_consumer_key" translatable="false"></string>
+    <string name="oc_uk_okapi_consumer_secret" translatable="false"></string>
+</resources>

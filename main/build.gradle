@@ -313,11 +313,12 @@ dependencies {
     // Okhttp network access
     compile 'com.squareup.okhttp3:okhttp:3.6.0'
     // Play Services
-    def playServicesVersion = '9.4.0'
+    def playServicesVersion = '9.2.1'
     compile "com.google.android.gms:play-services-location:$playServicesVersion"
+//    compile "com.google.android.gms:play-services-location:9.4.0"
     compile "com.google.android.gms:play-services-appinvite:$playServicesVersion"
 
-    compile 'com.google.android.gms:play-services-maps:9.4.0'
+    compile "com.google.android.gms:play-services-maps:$playServicesVersion"
 
     // somehow there is a transitive play service dependency which we don't want
     configurations.all*.exclude module: "play-services-measurement"
